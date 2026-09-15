@@ -1,0 +1,139 @@
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background: #eef1f8;
+    color: #111827;
+}
+
+/* Form */
+form {
+    width: 100%;
+    max-width: 430px;
+}
+
+/* Form Card */
+.rs-form-card {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    border-top: 4px solid #f5a623;
+}
+
+/* Heading */
+.rs-heading {
+    font-size: 22px;
+}
+.rs-heading2 {
+    font-size: small;
+    color:darkslategrey;
+}
+
+
+/* Gender */
+.rs-form-group label {
+    font-size: 15px;
+}
+
+.rs-form-group input {
+    accent-color: #f5a623;
+}
+
+/* Checkbox, Terms & Condition (FIXED: Complete color value applied) */
+.rs-checkbox-input {
+    width: 16px;
+    height: 16px;
+    accent-color: #f5a623;
+}
+.rs-condition {
+    padding-left: 5px;
+    color: rgb(130, 127, 122);
+}
+
+/* Password Indicator Strip Styles */
+.password-strength {
+    display: flex;
+    gap: 6px;
+}
+.bar {
+    flex: 1;
+    height: 5px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    transition: background 0.3s ease;
+}
+.bar.active {
+    background: #f5a623; /* Dynamic active orange stripe color fill */
+}
+
+/* Dynamic Interaction Red Input Error Highlight Border States */
+.rs-form-group.error input.form-control,
+.rs-form-group.error input {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+/* Dynamic Interaction Green Input Success Highlight Border States */
+.rs-form-group.success input.form-control,
+.rs-form-group.success input {
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+
+
+.rs-termlink {
+    color: rgba(255, 196, 0, 0.97);
+}
+
+/* Validation Class */
+.rs-form-group.error input:not([type="radio"]):not([type="checkbox"]),
+.rs-form-group.error select {
+    border: 2px solid red !important;
+}
+
+/* Success border for all text/email/password/select fields */
+.rs-form-group.success input:not([type="radio"]):not([type="checkbox"]),
+.rs-form-group.success select {
+    border: 2px solid green !important;
+}
+
+.error-message {
+    color: red;
+    font-size: 13px;
+    display: none;
+    margin-top: 4px;
+}
+
+.error-message.show {
+    display: block;
+}
+
+/* 4 strength bars */
+.password-strength {
+    display: flex;
+    gap: 8px;
+}
+
+.password-strength .bar {
+    height: 4px;
+    width: 100%;
+    background-color: #d1d5db;
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+}
+
+/* Password Strength Bar */
+.password-strength {
+    display: flex;
+    gap: 8px;
+}
+
+.password-strength .bar {
+    flex: 1;
+    height: 4px;
+    background-color: #d1d5db;
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+}
+
+.password-strength .bar.active {
+    background-color: green;
+}

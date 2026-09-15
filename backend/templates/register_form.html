@@ -1,18 +1,29 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form Bootstrap</title>
-    <link rel="stylesheet" href="./CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'CSS/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
 </head>
 <body>
-<main class="rs-page-wrapper min-vh-100  d-flex justify-content-center align-items-center py-4 px-5">
+<main class="rs-page-wrapper min-vh-100 d-flex justify-content-center align-items-center py-4 px-5">
     <section class="rs-form-card mw-100 bg-white border-3 rounded-5 border-top-2">
        
-    <form action="#" method="get" class="py-4 px-5" id="registrationForm">  
+    {% if error_message %}
+        <div style="color: red;">
+            <strong>{{ error_message }}</strong>
+            {{ form.errors }}
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'register' %}" class="py-4 px-5" id="registrationForm">
+
+        {% csrf_token %}
         <h1 class="rs-heading fw-bold py-3">Responsive Registration Form</h1>
         <!-- Email -->
         <div class="rs-form-group mb-2">
@@ -28,6 +39,13 @@
             </div>
             <small class="error-message"></small>
         </div>
+
+        <!-- Add this somewhere visible inside your form, like under the main heading -->
+        {% if error_message %}
+            <div class="alert alert-danger" role="alert" style="color: red; margin-bottom: 15px;">
+                {{ error_message }}
+            </div>
+        {% endif %}
 
         <!-- Password Group -->
         <div class="rs-form-group mb-2">
@@ -49,7 +67,6 @@
             <small class="error-message">Strong</small>
         </div>
 
-
         <!-- Re-type Password -->
         <div class="rs-form-group mb-2">
             <div class="rs-input-box position-relative">
@@ -68,11 +85,12 @@
         <!-- First Name -->
          <div class="rs-form-group mb-2">
             <div class="rs-input-box">
+
                 <input 
                     type="text" 
                     class="w-100 rounded-4 border-1 px-3 py-2 form-control" 
                     id="first-name" 
-                    name="firstName"
+                    name="firstname"
                     placeholder="First Name"
                     required>
             </div>
@@ -85,23 +103,78 @@
                     type="text" 
                     class="w-100 rounded-4 border-1 px-3 py-2 form-control" 
                     id="last-name" 
-                    name="lastName"
+                    name="lastname"
                     placeholder="Last Name"
                     required>
             </div>
             <small class="error-message"></small>
         </div>
 
+        <!-- Mobile Number -->
+        <div class="rs-form-group mb-2">
+            <div class="rs-input-box">
+                <input 
+                    type="text" 
+                    class="w-100 rounded-4 border-1 px-3 py-2 form-control" 
+                    id="mobile-number" 
+                    name="number"
+                    placeholder="Mobile Number"
+                    required>
+            </div>
+            <small class="error-message"></small>
+        </div>
+
+        <!-- Hobbies Checkboxes -->
+        <div class="rs-form-group mb-3 mt-2">
+            <h5 class="rs-heading2 mb-2">Hobbies</h5>
+            <div class="d-flex flex-wrap gap-3">
+                <label class="rs-condition">
+                    <input class="rs-checkbox-input" type="checkbox" name="hobbies" value="Cricket">
+                    Cricket
+                </label>
+                <label class="rs-condition">
+                    <input class="rs-checkbox-input" type="checkbox" name="hobbies" value="Football">
+                    Football
+                </label>
+                <label class="rs-condition">
+                    <input class="rs-checkbox-input" type="checkbox" name="hobbies" value="Hockey">
+                    Hockey
+                </label>
+                <label class="rs-condition">
+                    <input class="rs-checkbox-input" type="checkbox" name="hobbies" value="Bowling">
+                    Bowling
+                </label>
+                <label class="rs-condition">
+                    <input class="rs-checkbox-input" type="checkbox" name="hobbies" value="Basketball">
+                    Basketball
+                </label>
+            </div>
+        </div>
+
+        <!-- Birth Date -->
+        <div class="rs-form-group mb-2">
+            <h5 class="rs-heading2 mb-2">Birth Date</h5>
+            <div class="rs-input-box">
+                <input 
+                    type="date" 
+                    class="w-100 rounded-4 border-1 px-3 py-2 form-control text-secondary" 
+                    id="birth-date" 
+                    name="dob" 
+                    required>
+            </div>
+        </div>
+
+
         <!-- Gender -->
         <div class="rs-form-group mb-3">
             <h5 class="rs-heading2">Gender</h5>
             <label class="pe-3">
-                <input type="radio" name="gender" value="male" id="male" checked>
+                <input type="radio" name="gender" value="M" id="male" checked>
                 Male
             </label>
 
             <label>
-                <input type="radio" name="gender" value="female" id="female">
+                <input type="radio" name="gender" value="F" id="female">
                 Female
             </label>
         </div>
@@ -116,8 +189,6 @@
                     <option value="australia">Australia</option>
                     <option value="usa">USA</option>
                 </select>
-
-                <!-- <i class="fa-solid fa-chevron-down arrow-icon position-absolute top-75 mt-3 pe-5 end-1 me-5"></i> -->
             </div>
         </div>
 
@@ -127,11 +198,11 @@
                 <input class="rs-checkbox-input " type="checkbox" checked required>
                 I agree with the <a href="#" class="rs-termlink">terms and conditions</a>
             </label>
-
+            {% comment %} 
             <label class="rs-condition mb-3">
                 <input class="rs-checkbox-input" type="checkbox">
                 I want to receive the newsletter · optional
-            </label>
+            </label> {% endcomment %}
         </div>
         
         <!-- Button -->
@@ -145,9 +216,9 @@
     
 
 
-<script src="./JS/jquery-4.0.0.min.js"></script>
-<script src="./JS/jquery.validate.min.js"></script>
-<script src="./JS/bootstrap.bundle.min.js"></script>
-<script src="./JS/script.js"></script>
+{% comment %} <script src="{% static 'JS/jquery-4.0.0.min.js' %}"> </script>
+<script src="{% static 'JS/jquery.validate.min.js' %}"> </script>
+<script src="{% static 'JS/bootstrap.bundle.min.js' %}"> </script>
+<script src="{% static 'JS/script.js' %}"></script> {% endcomment %}
 </body>
 </html>
